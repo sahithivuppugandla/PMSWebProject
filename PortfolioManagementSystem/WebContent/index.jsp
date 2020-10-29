@@ -4,7 +4,7 @@
 		<title>Portfolio Management System</title>
 	</head>
 	<body>
-		<form action="LoginServlet" method="POST">
+		<form action="validate.jsp" method="POST">
 		<table>
 		<tr>
 		<td>Username</td>

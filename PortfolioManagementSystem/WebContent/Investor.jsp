@@ -24,12 +24,13 @@ table, th, td {
     <td>$2500.00</td>
     <td>TATA,SUZLON</td>
     <td>$1500.00</td>
-     <td>$$1000.00</td>
+     <td>$1000.00</td>
      <td>$900.00</td>
       
   </tr>
 </table>
-		<input type="button" value="Portfolio Wallet"/>
+		<a href="PortfolioWallet.jsp" >Portfolio Wallet</a>
+		<a href="Logout.jsp" >Logout</a>
   
 
 
