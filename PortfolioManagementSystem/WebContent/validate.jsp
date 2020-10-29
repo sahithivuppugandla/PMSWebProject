@@ -46,7 +46,6 @@ else if(username.equalsIgnoreCase("test")&& password.equalsIgnoreCase("test")&&r
 	  <%
 }
 else{
-	request.setAttribute("err","Please enter correct credentials");
 	%>
 	
 	 <jsp:include page="/Error.jsp"> 

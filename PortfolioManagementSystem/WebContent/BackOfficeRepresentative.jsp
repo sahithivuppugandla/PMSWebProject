@@ -18,7 +18,7 @@
 	<span>|</span>
 	<a href="ModifyCommodity.jsp">Modify Commodities</a>
 	<span>|</span>
-	<a href="AddCommodityPrice.jsp">Add Commodity Price</a>
+	<a href="AddCommodity.jsp">Add Commodity Price</a>
 	<span>|</span>
 	<a href="GenerateCommissionReport.jsp">Generate Commision Report</a>
 </nav>
