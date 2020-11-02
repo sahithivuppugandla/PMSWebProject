@@ -1,14 +1,14 @@
 package com.wellsfargo.batch5.pms.model;
 
 public class Company {
-    private String comapanyCode;
+    private Integer companyCode;
     private String companyTitle;
     private String companyOperations;
     private Integer shareCount;
     private Double openSharePrice;
     private String sector;
     private String currency;
-    private Double turnover;
+    private Integer turnover;
     private Stock stock;
    
     public Company(){
@@ -17,10 +17,10 @@ public class Company {
 
     
 	
-	public Company(String comapanyCode, String companyTitle, String companyOperations, Integer shareCount,
-			Double openSharePrice, String sector, String currency, Double turnover, Stock stock) {
+	public Company(Integer comapanyCode, String companyTitle, String companyOperations, Integer shareCount,
+			Double openSharePrice, String sector, String currency, Integer turnover, Stock stock) {
 		super();
-		this.comapanyCode = comapanyCode;
+		this.companyCode = comapanyCode;
 		this.companyTitle = companyTitle;
 		this.companyOperations = companyOperations;
 		this.shareCount = shareCount;
@@ -33,13 +33,19 @@ public class Company {
 
 
 
-	public String getComapanyCode() {
-		return comapanyCode;
+	
+
+	public Integer getCompanyCode() {
+		return companyCode;
 	}
 
-	public void setComapanyCode(String comapanyCode) {
-		this.comapanyCode = comapanyCode;
+
+
+	public void setCompanyCode(Integer companyCode) {
+		this.companyCode = companyCode;
 	}
+
+
 
 	public String getCompanyTitle() {
 		return companyTitle;
@@ -89,11 +95,11 @@ public class Company {
 		this.currency = currency;
 	}
 
-	public Double getTurnover() {
+	public Integer getTurnover() {
 		return turnover;
 	}
 
-	public void setTurnover(Double turnover) {
+	public void setTurnover(Integer turnover) {
 		this.turnover = turnover;
 	}
 

@@ -8,20 +8,23 @@
 </head>
 <body>
 <nav>
-	<a href="CreateCompany.jsp">Create Company Profile</a>
-	<span>|</span>
-	<a href="ModifyCompany.jsp">Modify Company Profile</a>
-	<span>|</span>
+	<a href="CompanyList.jsp">CompanyList</a>
+	
+	<br>
 	<a href="AddStock.jsp">Add Stock Prices</a>
-	<span>|</span>
+
+	<br>
 	<a href="CreateCommodity.jsp">Create Commodities</a>
-	<span>|</span>
+
+	<br>
 	<a href="ModifyCommodity.jsp">Modify Commodities</a>
-	<span>|</span>
+
+	<br>
 	<a href="AddCommodity.jsp">Add Commodity Price</a>
-	<span>|</span>
+	
+	<br>
 	<a href="GenerateCommissionReport.jsp">Generate Commision Report</a>
 </nav>
-
+<a href="Logout.jsp" >Logout</a>
 </body>
 </html>

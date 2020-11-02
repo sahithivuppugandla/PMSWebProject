@@ -19,6 +19,7 @@ table, th, td {
     
   </tr>
 </table>
+<br>
 		<input type="button" value="Add Balance"/>
 		<input type="button" value="Withdraw Balance"/>
   

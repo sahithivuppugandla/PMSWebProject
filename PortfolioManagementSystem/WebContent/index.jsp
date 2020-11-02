@@ -1,10 +1,12 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Portfolio Management System</title>
 	</head>
 	<body>
-		<form action="validate.jsp" method="POST">
+		<form action="LoginServlet" method="POST">
 		<table>
 		<tr>
 		<td>Username</td>
@@ -12,7 +14,7 @@
 		</tr>
 		<tr>
 		<td>Password</td>
-		<td><input type="text" name="password" required/></td>
+		<td><input type="password" name="password" required/></td>
 		</tr>
 		<tr>
 		<td>Role</td>
@@ -21,7 +23,7 @@
              <option value = "">Select...</option>
                <option value = "admin">Admin</option>
                <option value = "investor">Investor</option>
-               <option value = "bor">Back Office Representative</option>
+               <option value = "Back Office Representative">Back Office Representative</option>
               </select>
              </td>
 		</tr>

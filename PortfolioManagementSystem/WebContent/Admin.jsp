@@ -10,6 +10,6 @@
 <h1>Welcome Admin!!</h1>
 
 <a href="BORRegistration.jsp">Register A Back Office Representative</a>
-
+<a href="Logout.jsp" >Logout</a>
 </body>
 </html>

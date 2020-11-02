@@ -1,30 +1,22 @@
 package com.wellsfargo.batch5.pms.model;
 
-public class User {
+public class UserLogin {
 
-	private Integer id;
 	private String uname;
 	private String password;
 	private String role;
 	
-	public User() {
+	public UserLogin() {
 		System.out.println("default");
 	}
-	public User(String uname, String password, String role,Integer id) {
+	public UserLogin(String uname, String password, String role) {
 		super();
 		this.uname = uname;
 		this.password = password;
 		this.role = role;
-		this.id=id;
+		
 	}
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
+		
 	public String getUname() {
 		return uname;
 	}
