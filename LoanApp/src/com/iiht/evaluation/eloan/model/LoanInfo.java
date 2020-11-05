@@ -1,27 +1,26 @@
 package com.iiht.evaluation.eloan.model;
 
+import java.time.LocalDate;
+
 public class LoanInfo {
-	private String applno;
+	private Integer applno;
 	 private String purpose;
-	 private int amtrequest;
-	 private String doa;
+	 private Integer amtrequest;
+	 private LocalDate doa;
 	 private String bstructure;
 	 private String bindicator;
+	 private String tindicator;
 	 private String address;
-	 @Override
-	public String toString() {
-		return "LoanInfo [applno=" + applno + ", purpose=" + purpose + ", amtrequest=" + amtrequest + ", doa=" + doa
-				+ ", bstructure=" + bstructure + ", bindicator=" + bindicator + ", address=" + address + ", email="
-				+ email + ", mobile=" + mobile + ", status=" + status + "]";
-	}
 	private String email;
 	 private String mobile;
 	 private String status;
 	 public LoanInfo() {
 		 
 	 }
-	 public LoanInfo(String applno, String purpose, int amtrequest, String doa, String bstructure, String bindicator,
-			String address, String email, String mobile,String status) {
+	 
+	 
+	public LoanInfo(Integer applno, String purpose, int amtrequest, LocalDate doa, String bstructure, String bindicator,
+			String tindicator, String address, String email, String mobile, String status) {
 		super();
 		this.applno = applno;
 		this.purpose = purpose;
@@ -29,16 +28,28 @@ public class LoanInfo {
 		this.doa = doa;
 		this.bstructure = bstructure;
 		this.bindicator = bindicator;
+		this.tindicator = tindicator;
 		this.address = address;
 		this.email = email;
 		this.mobile = mobile;
-		this.status=status;
+		this.status = status;
 	}
 
-	public String getApplno() {
+
+	public String getTindicator() {
+		return tindicator;
+	}
+
+
+	public void setTindicator(String tindicator) {
+		this.tindicator = tindicator;
+	}
+
+
+	public Integer getApplno() {
 		return applno;
 	}
-	public void setApplno(String applno) {
+	public void setApplno(Integer applno) {
 		this.applno = applno;
 	}
 	public String getPurpose() {
@@ -53,11 +64,11 @@ public class LoanInfo {
 	public void setAmtrequest(int amtrequest) {
 		this.amtrequest = amtrequest;
 	}
-	public String getDoa() {
+	public LocalDate getDoa() {
 		return doa;
 	}
-	public void setDoa(String doa) {
-		this.doa = doa;
+	public void setDoa(LocalDate localDate) {
+		this.doa = localDate;
 	}
 	public String getBstructure() {
 		return bstructure;
@@ -94,6 +105,14 @@ public class LoanInfo {
 	}
 	public String getStatus() {
 		return status;
+	}
+
+
+	@Override
+	public String toString() {
+		return "LoanInfo [applno=" + applno + ", purpose=" + purpose + ", amtrequest=" + amtrequest + ", doa=" + doa
+				+ ", bstructure=" + bstructure + ", bindicator=" + bindicator + ", tindicator=" + tindicator
+				+ ", address=" + address + ", email=" + email + ", mobile=" + mobile + ", status=" + status + "]";
 	}
 
 }

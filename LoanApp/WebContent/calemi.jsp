@@ -13,6 +13,37 @@
      Read the values from the admin servlet and cal emi and other details and send to
      to the same admin servlet to update the values in the database 
   -->  
+<jsp:include page="header.jsp" />
+	<div align="right">
+		<a href="index.jsp">Logout</a>
+	</div>
+	<nav>
+		<a href="adminhome1.jsp">Admin Dashboard</a><br>
+	</nav>
+	<hr />
+	<div align=center>
+		<h3>Calculate EMI</h3>
 
+		<form action="admin?action=callemi" method="POST">
+
+			<label>Loan Amount</label> 
+			
+			<input type="number" name="loanAmount" required />
+			
+			<label>Loan Duration(Months)</label> 
+			
+			<input type="number" name="loanDuration" required />
+			
+			
+			<label>Interest Rate</label> 
+			
+			<input type="number" name="interestDate" required />
+			
+			<input type="submit" value="Calculate" />
+
+		</form>
+		</div>
+
+		<jsp:include page="footer.jsp" />
 </body>
 </html>
