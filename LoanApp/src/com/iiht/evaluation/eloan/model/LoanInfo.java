@@ -12,7 +12,7 @@ public class LoanInfo {
 	 private String tindicator;
 	 private String address;
 	private String email;
-	 private String mobile;
+	 private Integer mobile;
 	 private String status;
 	 public LoanInfo() {
 		 
@@ -20,7 +20,7 @@ public class LoanInfo {
 	 
 	 
 	public LoanInfo(Integer applno, String purpose, int amtrequest, LocalDate doa, String bstructure, String bindicator,
-			String tindicator, String address, String email, String mobile, String status) {
+			String tindicator, String address, String email, Integer mobile, String status) {
 		super();
 		this.applno = applno;
 		this.purpose = purpose;
@@ -94,10 +94,10 @@ public class LoanInfo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getMobile() {
+	public Integer getMobile() {
 		return mobile;
 	}
-	public void setMobile(String mobile) {
+	public void setMobile(Integer mobile) {
 		this.mobile = mobile;
 	}
 	public void setStatus(String status) {

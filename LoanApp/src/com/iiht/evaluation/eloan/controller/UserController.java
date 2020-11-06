@@ -2,6 +2,8 @@ package com.iiht.evaluation.eloan.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,9 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.iiht.evaluation.eloan.dao.ConnectionDao;
+import com.iiht.evaluation.eloan.dao.LoanInfoImpl;
+import com.iiht.evaluation.eloan.model.LoanInfo;
 import com.iiht.evaluation.eloan.model.User;
-
+import com.iiht.evaluation.eloan.service.ILoanInfoService;
 import com.iiht.evaluation.eloan.service.IUserService;
+import com.iiht.evaluation.eloan.service.LoanInfoServiceImpl;
 import com.iiht.evaluation.eloan.service.UserService;
 import com.wellsfargo.batch5.pms.exception.LoanException;
 
@@ -22,6 +27,7 @@ public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ConnectionDao connDao;
 	private IUserService userService;
+	private ILoanInfoService loanInfoService;
 
 	public void setConnDao(ConnectionDao connDao) {
 		this.connDao = connDao;
@@ -34,6 +40,7 @@ public class UserController extends HttpServlet {
 		System.out.println(jdbcURL + jdbcUsername + jdbcPassword);
 		this.connDao = new ConnectionDao(jdbcURL, jdbcUsername, jdbcPassword);
 		this.userService = new UserService();
+		this.loanInfoService= new LoanInfoServiceImpl();
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -121,11 +128,32 @@ public class UserController extends HttpServlet {
 		return view;
 	}
 
-	private String placeloan(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		/* write the code to place the loan information */
-
-		return null;
+	private String placeloan(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		LoanInfo loaninfo= new LoanInfo();
+		
+		loaninfo.setPurpose(request.getParameter("loanName"));
+		loaninfo.setAmtrequest(Integer.parseInt(request.getParameter("loanAmount")));
+		loaninfo.setDoa(LocalDate.parse(request.getParameter("loanApplicationDate")));
+		loaninfo.setBstructure(request.getParameter("businessStructure"));
+		loaninfo.setBindicator(request.getParameter("billingIndicator"));
+		loaninfo.setTindicator(request.getParameter("taxIndicator"));
+		loaninfo.setAddress(request.getParameter("contactAddress"));
+		loaninfo.setEmail(request.getParameter("contactEmail"));
+		loaninfo.setMobile(Integer.parseInt(request.getParameter("contactMobile")));
+		
+	
+		String view="";
+		
+		try {
+			loanInfoService.apply(loaninfo);
+			request.setAttribute("msg", "Application Submitted Successfully"+" "+"Application Number:"+" "+loaninfo.getApplno());
+			view="userhome.jsp";
+		}catch(LoanException e) {
+			request.setAttribute("errs", e.getMessage());
+			request.setAttribute("loaninfo",loaninfo);
+			view="errorPage.jsp";
+		}
+		return view;
 	}
 
 	private String application1(HttpServletRequest request, HttpServletResponse response) {
@@ -135,11 +163,22 @@ public class UserController extends HttpServlet {
 		return "application.jsp";
 	}
 
-	private String editLoanProcess(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		// TODO Auto-generated method stub
-		/* write the code to edit the loan info */
-
-		return null;
+	private String editLoanProcess(HttpServletRequest request, HttpServletResponse response) throws SQLException, LoanException {
+		LoanInfo loaninfo= new LoanInfo();
+		String appNum=request.getParameter("id");
+		loaninfo.setPurpose(request.getParameter("loanName"));
+		loaninfo.setAmtrequest(Integer.parseInt(request.getParameter("loanAmount")));
+		loaninfo.setDoa(LocalDate.parse(request.getParameter("loanApplicationDate")));
+		loaninfo.setBstructure(request.getParameter("businessStructure"));
+		loaninfo.setBindicator(request.getParameter("billingIndicator"));
+		loaninfo.setTindicator(request.getParameter("taxIndicator"));
+		loaninfo.setAddress(request.getParameter("contactAddress"));
+		loaninfo.setEmail(request.getParameter("contactEmail"));
+		loaninfo.setMobile(Integer.parseInt(request.getParameter("contactMobile")));
+		loaninfo.setApplno(Integer.parseInt(appNum));
+		loanInfoService.save(loaninfo);
+		request.setAttribute("msg", "Application Edited Successfully"+" "+"Application Number:"+" "+loaninfo.getApplno());
+		return "userhome.jsp";
 	}
 
 	private String registerUser(HttpServletRequest request, HttpServletResponse response)
@@ -163,27 +202,39 @@ public class UserController extends HttpServlet {
 		return null;
 	}
 
-	private String displaystatus(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	private String displaystatus(HttpServletRequest request, HttpServletResponse response) throws SQLException, LoanException {
 		// TODO Auto-generated method stub
 		/*
 		 * write the code the display the loan status based on the given application
 		 * number
 		 */
+		int applno = Integer.parseInt(request.getParameter("applicationNum"));
+		request.setAttribute("loan", loanInfoService.trackById(applno));
 
-		return null;
+		return "loanDetails.jsp";
+		
 	}
 
-	private String editloan(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		/* write a code to return to editloan page */
-		return null;
-	}
+	private String editloan(HttpServletRequest request, HttpServletResponse response) throws NumberFormatException, LoanException {
+		 String appNum = request.getParameter("applicationNum");
+	        LoanInfo exLoanInfo = loanInfoService.trackById(Integer.parseInt(appNum));
+	        if(exLoanInfo.getStatus().equalsIgnoreCase("Submitted")) {
+	        	  request.setAttribute("existingLoan", exLoanInfo);
+	   	       return "application.jsp";
+	        }else {
+	        	 request.setAttribute("msg", "Loan cannot be edited since its already in process");
+	        	return "userhome.jsp";
+	        }
+	      
+
+	    }
+	
 
 	private String trackloan(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		/* write a code to return to trackloan page */
-
-		return null;
+		return "trackloan.jsp";
+		
 	}
 
 	private String application(HttpServletRequest request, HttpServletResponse response) {

@@ -14,6 +14,6 @@ public interface ILoanInfoDao {
 	LoanInfo save(LoanInfo loan) throws SQLException, LoanException;
 	List<LoanInfo> listAll() throws LoanException;
 	LoanInfo trackById(Integer applno) throws LoanException;
-	
 	Boolean updateStatus(Integer loanApplicationNum, String status) throws SQLException, LoanException;
+
 }

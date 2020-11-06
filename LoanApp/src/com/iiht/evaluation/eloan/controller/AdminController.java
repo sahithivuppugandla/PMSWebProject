@@ -21,12 +21,17 @@ import com.iiht.evaluation.eloan.dao.ConnectionDao;
 import com.iiht.evaluation.eloan.dto.LoanDto;
 import com.iiht.evaluation.eloan.model.ApprovedLoan;
 import com.iiht.evaluation.eloan.model.LoanInfo;
+import com.iiht.evaluation.eloan.service.ILoanInfoService;
+import com.iiht.evaluation.eloan.service.LoanInfoServiceImpl;
+import com.wellsfargo.batch5.pms.exception.LoanException;
 
 
 @WebServlet("/admin")
 public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ConnectionDao connDao;
+	private ILoanInfoService loanService;
+
 	
 	public void setConnDao(ConnectionDao connDao) {
 		this.connDao = connDao;
@@ -37,6 +42,7 @@ public class AdminController extends HttpServlet {
 		String jdbcPassword = config.getServletContext().getInitParameter("jdbcPassword");
 		System.out.println(jdbcURL + jdbcUsername + jdbcPassword);
 		this.connDao = new ConnectionDao(jdbcURL, jdbcUsername, jdbcPassword);
+		this.loanService = new LoanInfoServiceImpl();
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -101,10 +107,9 @@ public class AdminController extends HttpServlet {
 		return null;
 	}
 
-	private String listall(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-	/* write the code to display all the loans */
-		
-		return null;
+	private String listall(HttpServletRequest request, HttpServletResponse response) throws SQLException, LoanException {
+		request.setAttribute("loansList", loanService.listAll());
+		return "listall.jsp";
 	}
 
 	

@@ -43,6 +43,7 @@ email varchar(255) NOT NULL,
 mobile int(10) NOT NULL,
 status varchar(30)
 );
+ALTER TABLE LoanApplication AUTO_INCREMENT = 1000;
 
-INSERT INTO LoanApplication(loanAppNum,loanName,loanAmt,loanAppDate,businessStructure,billingIndicator,taxIndicator,address,email,mobile,status) values
-(1000,"Personal",5679,"2020-09-09","Organization","Salaried","Tax Payer","Hitech","jim@gmail.com",967654490,"submitted");
+INSERT INTO LoanApplication(loanName,loanAmt,loanAppDate,businessStructure,billingIndicator,taxIndicator,address,email,mobile,status) values
+("Personal",5679,"2020-09-09","Organization","Salaried","Tax Payer","Hitech","jim@gmail.com",967654490,"submitted");
