@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-
+<style>
+body {
+	font-family: Calibri, sans-serif;
+	background-color: lightblue;
+}
+</style>
 </head>
 <body>
 	<!-- write the code to read application number, and send it to admincontrollers
@@ -21,18 +26,18 @@
 	</nav>
 	<hr />
 	<div align=center>
+		<h3>${msg}</h3>
 		<h2>Process Loan</h2>
 
 		<form action="admin?action=process" method="POST">
 
-			<label>Enter Application Number</label> 
-			<input type="text" name="applno" required />
-			<input type="submit" value="Submit" />
+			<label>Enter Application Number</label> <input type="text"
+				name="applno" required /> <input type="submit" value="Submit" />
 
 		</form>
-		</div>
+	</div>
 
-		<jsp:include page="footer.jsp" />
+	<jsp:include page="footer.jsp" />
 
 </body>
 </html>

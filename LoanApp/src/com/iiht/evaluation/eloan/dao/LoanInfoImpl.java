@@ -21,7 +21,7 @@ public class LoanInfoImpl implements ILoanInfoDao {
 
 	public static final String UPD_STATUS_QRY = "UPDATE LoanApplication SET status=? WHERE loanAppNum=?";
 
-	public static final String SELECT_ALL_QRY = "SELECT loanAppNum,loanName,loanAmt,loanAppDate,businessStructure,billingIndicator,taxIndicator,address,email,mobile,status FROM LoanApplication";
+	public static final String SELECT_ALL_QRY = "SELECT loanAppNum,loanName,loanAmt,loanAppDate,businessStructure,billingIndicator,taxIndicator,address,email,mobile,status FROM LoanApplication where status=?";
 	public static final String SELECT_BY_ID_QRY = "SELECT loanAppNum,loanName,loanAmt,loanAppDate,businessStructure,billingIndicator,taxIndicator,address,email,mobile,status FROM LoanApplication WHERE loanAppNum=?";
 
 	@Override
@@ -119,6 +119,7 @@ public class LoanInfoImpl implements ILoanInfoDao {
 		List<LoanInfo> loans = new ArrayList<>();
 		try (Connection con = ConnectionDao.connect(); PreparedStatement pst = con.prepareStatement(SELECT_ALL_QRY)) {
 
+			pst.setString(1, "Submitted");
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {

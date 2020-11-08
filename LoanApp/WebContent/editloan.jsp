@@ -5,7 +5,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Edit Loan Application</title>
-
+<style>   
+body {  
+  font-family: Calibri,sans-serif;  
+  background-color: lightblue;  
+} 
+</style>
 </head>
 <body>
 	<!-- read the application number to edit from user and send to 

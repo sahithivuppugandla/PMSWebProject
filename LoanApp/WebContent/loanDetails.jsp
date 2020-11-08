@@ -7,6 +7,14 @@
 <meta charset="ISO-8859-1">
 <title>Display Loan Status</title>
 
+<style>   
+body {  
+  font-family: Calibri,sans-serif;  
+  background-color: lightblue;  
+} 
+table, th, td {
+	border: 1px solid black;
+}
 </style>
 </head>
 <body>

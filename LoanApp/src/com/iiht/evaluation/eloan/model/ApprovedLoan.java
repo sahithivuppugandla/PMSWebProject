@@ -67,13 +67,6 @@ public class ApprovedLoan {
 		this.lcd = localDate;
 	}
 	
-	public Integer getInterestRate() {
-		return interestrate;
-	}
-
-	public void setInterestRate(Integer interestrate) {
-		this.interestrate = interestrate;
-	}
 
 	public Integer getEmi() {
 		return emi;
@@ -81,6 +74,14 @@ public class ApprovedLoan {
 
 	public void setEmi(Integer emi) {
 		this.emi = emi;
+	}
+
+	public Integer getInterestrate() {
+		return interestrate;
+	}
+
+	public void setInterestrate(Integer interestrate) {
+		this.interestrate = interestrate;
 	}
 
 	@Override

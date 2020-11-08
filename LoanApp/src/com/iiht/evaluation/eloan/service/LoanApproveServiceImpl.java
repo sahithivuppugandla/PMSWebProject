@@ -1,6 +1,7 @@
 package com.iiht.evaluation.eloan.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.iiht.evaluation.eloan.dao.ILoanApprove;
 import com.iiht.evaluation.eloan.dao.LoanApproveImpl;
@@ -19,5 +20,9 @@ public class LoanApproveServiceImpl implements ILoanApproveService {
 	public ApprovedLoan calemi(ApprovedLoan loan) throws LoanException, SQLException {
 		return approveDao.calemi(loan);
 	}
-
+	@Override
+	public List<ApprovedLoan> listAll() throws LoanException {
+		
+		return approveDao.listAll();
+	}
 }

@@ -5,7 +5,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Corona Kit-Error</title>
-
+<style>   
+body {  
+  font-family: Calibri,sans-serif;  
+  background-color: lightblue;  
+} 
+</style>
 </head>
 <body>
 <jsp:include page="header.jsp"/>

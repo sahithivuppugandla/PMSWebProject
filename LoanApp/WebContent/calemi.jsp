@@ -7,8 +7,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<style>
-
+<style>   
+body {  
+  font-family: Calibri,sans-serif;  
+  background-color: lightblue;  
+} 
 </style>
 </head>
 <body>

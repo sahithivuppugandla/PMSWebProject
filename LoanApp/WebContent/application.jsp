@@ -10,14 +10,15 @@
   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
   String date = sdf.format(new Date());
 %>
- <script>
-        document.getElementById("businessStructure").value ='${existingLoan.bstructure}';
-        </script>
+
 <meta charset="ISO-8859-1">
 <title>Loan Application Form</title>
-<script
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+<style>   
+body {  
+  font-family: Calibri,sans-serif;  
+  background-color: lightblue;  
+} 
+</style>
 </head>
 <body onload="myFunction()">
 	<jsp:include page="header.jsp" />

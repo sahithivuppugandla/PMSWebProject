@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>eLoan system</title>
-
+<style><%@include file="/WEB-INF/main.css"%></style>
 </head>
 <body>
 	<!-- write the html code to read user credentials and send it to validateservlet
@@ -18,10 +18,10 @@
 	<div class="container">
 		<form action="user?action=validate" method="POST">
 			<div>
-				<label>Username</label> <input type="text" placeholder="Enter Username" name="username" required />
+				<label>Username</label> <input type="text" name="username" required />
 			</div>
 			<div>
-				<label>Password</label> <input type="password" placeholder="Enter Passsword" name="password"
+				<label>Password</label> <input type="password" name="password"
 					required />
 			</div>
 			<div class="container" style="background-color:#f1f1f1">

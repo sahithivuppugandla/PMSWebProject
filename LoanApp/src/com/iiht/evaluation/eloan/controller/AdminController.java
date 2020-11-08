@@ -97,9 +97,9 @@ public class AdminController extends HttpServlet {
 		int applno = Integer.parseInt(request.getParameter("applno"));
 		Boolean isUpdated = loanService.updateStatus(applno, "Approved");
 		if(isUpdated) {
-		request.setAttribute("msg", "Loan no" +applno+ "Approved Succesfully");
+		request.setAttribute("msg", "Loan Application Number" +applno+ "Approved Succesfully");
 		}else {
-		request.setAttribute("msg", "Encountered problem while approving Loan no" +applno );
+		request.setAttribute("msg", "Encountered problem while Approving Loan Application Number" +applno );
 		}
 
 		return "adminhome1.jsp";
@@ -115,11 +115,11 @@ public class AdminController extends HttpServlet {
 		approvedloan.setAmotsanctioned(Integer.parseInt(request.getParameter("loanAmount")));
 		approvedloan.setLoanterm(Integer.parseInt(request.getParameter("loanDuration")));
 		approvedloan.setPsd(LocalDate.now());
-		approvedloan.setLcd(LocalDate.now());
-		approvedloan.setInterestRate(Integer.parseInt(request.getParameter("interestRate")));
+		approvedloan.setLcd(LocalDate.now().plusMonths(Integer.parseInt(request.getParameter("loanDuration"))));
+		approvedloan.setInterestrate(Integer.parseInt(request.getParameter("interestRate")));
 	
 		
-		int term = (approvedloan.getAmotsanctioned())*(1 + approvedloan.getInterestRate()/100)^(approvedloan.getLoanterm());
+		int term = (approvedloan.getAmotsanctioned())*(1 + approvedloan.getInterestrate()/100)^(approvedloan.getLoanterm());
 		int emi = term/(approvedloan.getLoanterm());
 		
 		approvedloan.setEmi(emi);
@@ -130,10 +130,12 @@ public class AdminController extends HttpServlet {
 			
 			loanApproveService.calemi(approvedloan);
 			loanService.updateStatus(applno, "Approved");
-			request.setAttribute("loanapproved",approvedloan);
+			request.setAttribute("submittedloans", loanService.listAll());
+			
+			request.setAttribute("approvedloans", loanApproveService.listAll());
 			request.setAttribute("approve", "Loan Approved Successfully");
 			
-			view="adminhome1.jsp";
+			view="listall.jsp";
 		}catch(LoanException e) {
 			request.setAttribute("errs", e.getMessage());
 			request.setAttribute("loanapproved",approvedloan);
@@ -141,21 +143,35 @@ public class AdminController extends HttpServlet {
 		}
 		return view;
 	}
-	private String process(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	private String process(HttpServletRequest request, HttpServletResponse response) throws SQLException, LoanException {
 		// TODO Auto-generated method stub
 	/* return to process page */
 		int applno = Integer.parseInt(request.getParameter("applno"));
 		request.setAttribute("appNum", applno);
-		return  "calemi.jsp";
-	}
+		 LoanInfo exLoanInfo = loanService.trackById(applno);
+	        if(!exLoanInfo.getStatus().equalsIgnoreCase("Approved")) {
+	        	  request.setAttribute("existingLoan", exLoanInfo);
+	        	  return  "calemi.jsp";
+	        }else {
+	        	 request.setAttribute("msg", "Loan cannot be processed as its already approved");
+	        	return "process.jsp";
+	        }
+	      
+
+	    }
+		
+	
 	private String adminLogout(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 	/* write code to return index page */
-		return null;
+		return "index.jsp";
 	}
 
 	private String listall(HttpServletRequest request, HttpServletResponse response) throws SQLException, LoanException {
-		request.setAttribute("loansList", loanService.listAll());
+		request.setAttribute("submittedloans", loanService.listAll());
+		
+		request.setAttribute("approvedloans", loanApproveService.listAll());
+		
 		return "listall.jsp";
 	}
 

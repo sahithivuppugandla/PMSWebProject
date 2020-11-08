@@ -123,7 +123,7 @@ public class UserController extends HttpServlet {
 		} else if (role.equalsIgnoreCase("User")) {
 			view = "/userhome.jsp";
 		} else {
-			view = "/errorPage.jsp";
+			view = "Error.jsp";
 		}
 		request.setAttribute("username", loginDetails.getUsername());
 		return view;
@@ -147,7 +147,7 @@ public class UserController extends HttpServlet {
 		
 		try {
 			loanInfoService.apply(loaninfo);
-			request.setAttribute("msg", "Application Submitted Successfully"+" "+"Application Number:"+" "+loaninfo.getApplno());
+			request.setAttribute("msg", "Application Number" +" " +loaninfo.getApplno()+" "+" Submitted Successfully");
 			view="userhome.jsp";
 		}catch(LoanException e) {
 			request.setAttribute("errs", e.getMessage());
@@ -178,7 +178,7 @@ public class UserController extends HttpServlet {
 		loaninfo.setMobile(Integer.parseInt(request.getParameter("contactMobile")));
 		loaninfo.setApplno(Integer.parseInt(appNum));
 		loanInfoService.save(loaninfo);
-		request.setAttribute("msg", "Application Edited Successfully"+" "+"Application Number:"+" "+loaninfo.getApplno());
+		request.setAttribute("msg", "Application Number" +" " +loaninfo.getApplno()+" "+" Edited Successfully");
 		return "userhome.jsp";
 	}
 
@@ -223,7 +223,7 @@ public class UserController extends HttpServlet {
 	        	  request.setAttribute("existingLoan", exLoanInfo);
 	   	       return "application.jsp";
 	        }else {
-	        	 request.setAttribute("msg", "Loan cannot be edited since its already in process");
+	        	 request.setAttribute("msg", "Loan cannot be edited as its in process.Please track loan status using Application Number");
 	        	return "userhome.jsp";
 	        }
 	      
