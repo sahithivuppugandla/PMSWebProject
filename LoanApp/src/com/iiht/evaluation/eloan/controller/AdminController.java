@@ -153,7 +153,7 @@ public class AdminController extends HttpServlet {
 	        	  request.setAttribute("existingLoan", exLoanInfo);
 	        	  return  "calemi.jsp";
 	        }else {
-	        	 request.setAttribute("msg", "Loan cannot be processed as its already approved");
+	        	 request.setAttribute("msg", "Loan cannot be processed as its already approved!!");
 	        	return "process.jsp";
 	        }
 	      

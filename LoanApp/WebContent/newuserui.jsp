@@ -17,7 +17,7 @@ body {
 	<!-- read user name and password from user to create account
 	     and send to usercontrollers registeruser method
 	-->
-<h1>User Registered successfully</h1>
+<h1>User Registered successfully !</h1>
 
 <a href="index.jsp"> Login User</a>
 </body>

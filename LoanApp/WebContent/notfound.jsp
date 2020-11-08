@@ -18,6 +18,8 @@ body {
 	<div>
 		<h1>Requested Resource Not Available</h1>
 	</div>
+	<a href="index.jsp">Go Back to Home Page</a>
+	
 <hr/>	
 	<jsp:include page="footer.jsp"/>
 </body>

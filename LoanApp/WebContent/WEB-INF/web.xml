@@ -6,7 +6,7 @@
   </welcome-file-list>
   <context-param>
     <param-name>jdbcUrl</param-name>
-    <param-value>jdbc:mysql://localhost:3306/loanApp?useSSL=false</param-value>
+    <param-value>jdbc:mysql://localhost:3306/loanApplication?useSSL=false</param-value>
   </context-param>
   <context-param>
     <param-name>jdbcUsername</param-name>

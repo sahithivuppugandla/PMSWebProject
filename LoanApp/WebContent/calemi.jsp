@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Calculate EMI</title>
 <style>   
 body {  
   font-family: Calibri,sans-serif;  
@@ -35,20 +35,20 @@ body {
 			<label>Application Number</label> 
 			
 			<input type="number" name="appNum" required readonly value="<c:out value='${appNum}' />" />
-			
+			<br><br>
 			<label>Loan Amount</label> 
 			
 			<input type="number" name="loanAmount" required />
-			
+			<br><br>
 			<label>Loan Duration(Months)</label> 
 			
 			<input type="number" name="loanDuration" required />
-			
+			<br><br>
 			<label>Interest Rate</label> 
 			
 			<input type="number" name="interestRate" required />
-			
-			<input type="submit" value="Calculate" />
+			<br><br>
+			<input type="submit" value="Calculate and Approve" />
 
 		</form>
 		</div>

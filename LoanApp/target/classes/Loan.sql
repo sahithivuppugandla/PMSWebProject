@@ -1,8 +1,8 @@
 
-DROP DATATBASE if exists loanApp;
-CREATE DATABASE loanApp;
+DROP DATATBASE if exists loanApplication;
+CREATE DATABASE loanApplication;
 
-Use loanApp;
+Use loanApplication;
 
 
 CREATE TABLE User(
@@ -13,21 +13,8 @@ CREATE TABLE User(
 
 Insert into User values
     ("admin","admin","Admin"),
-    ("John","pass1","User");
+    ("Shreya","pass1","User");
     
-
-CREATE TABLE LoanInfo(
-    Applno varchar(20) not null primary key,
-    purpose varchar(20),
-    amtrequest int,
-    doa date,
-    bstructure varchar(30),
-    bindicator varchar(30),
-    caddress varchar(100),
-    email varchar(100),
-    mobile varchar(10),
-    status varchar(20)
-);
 
 CREATE TABLE LoanApplication(
 
@@ -40,7 +27,7 @@ billingIndicator varchar(30) NOT NULL,
 taxIndicator varchar(30) NOT NULL,
 address varchar(255) NOT NULL,
 email varchar(255) NOT NULL,
-mobile int(10) NOT NULL,
+mobile int(20) NOT NULL,
 status varchar(30)
 );
 
@@ -54,7 +41,9 @@ emi int NOT NULL,
 loanAppNum int not null references LoanApplication(loanAppNum),
 CONSTRAINT LoanSanctioned_ibfk_1 FOREIGN KEY (loanAppNum) references LoanApplication(loanAppNum) 
 );
+
 ALTER TABLE LoanApplication AUTO_INCREMENT = 1000;
 
 INSERT INTO LoanApplication(loanName,loanAmt,loanAppDate,businessStructure,billingIndicator,taxIndicator,address,email,mobile,status) values
-("Personal",5679,"2020-09-09","Organization","Salaried","Tax Payer","Hitech","jim@gmail.com",967654490,"submitted");
+("Home Mortgage",58979,"2020-09-09","Organization","Salaried","Tax Payer","Hitech","jim@gmail.com",967654490,"submitted");
+

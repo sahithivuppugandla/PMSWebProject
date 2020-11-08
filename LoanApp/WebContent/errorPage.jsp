@@ -19,7 +19,9 @@ body {
 		<h3>Something went wrong! We regret the inconvenience!</h3>
 		<p>Error Message : <%=exception.getMessage()%> </p>
 		<p>Please Contact Administrator</p>
+		<p><b>${errMsg }!</b></p>
 	</div>
+	<a href="index.jsp">Go Back to Home Page</a>
 <hr/>	
 	<jsp:include page="footer.jsp"/>
 </body>

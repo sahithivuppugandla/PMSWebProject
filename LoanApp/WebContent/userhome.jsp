@@ -15,7 +15,7 @@ body {
 <body>
 	<jsp:include page="header.jsp" />
 	<h3>Welcome ${username} !</h3>
-	<h4>User Dash Board</h4>
+	<h2>User Dash Board</h2>
 	<h3>${msg}</h3>
 	<div align="right">
 		<a href="index.jsp">Logout</a>

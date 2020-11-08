@@ -5,12 +5,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-
+<style>
+body {
+	font-family: Calibri, sans-serif;
+	background-color: lightblue;
+}
+</style>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
 <hr/>
 <div align=center>
+<a href="index.jsp">Go Back to Home Page</a>
 	<h2>User Registration Form</h2>
 	<form action="user?action=registeruser" method="post">
 		<div>

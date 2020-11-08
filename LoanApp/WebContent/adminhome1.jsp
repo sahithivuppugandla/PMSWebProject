@@ -17,7 +17,7 @@ body {
 <div align="right"><a href="index.jsp">Logout</a></div>
 <h3>Welcome ${username} !</h3>
 <h4>${msg}</h4>
-<h4>Admin Dash Board</h4>
+<h2>Admin Dash Board</h2>
 <a href="admin?action=listall">List All</a><br>
 <a href="process.jsp">Process Loan</a><br>
 <jsp:include page="footer.jsp"/>

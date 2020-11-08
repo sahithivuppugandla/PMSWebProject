@@ -184,11 +184,18 @@ public class UserController extends HttpServlet {
 
 	private String registerUser(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, LoanException {
+		try {
 		String username = request.getParameter("loginid");
 		String password = request.getParameter("password");
 		User user = new User(username, password, "User");
 		userService.add(user);
 		return "newuserui.jsp";
+		}catch(LoanException e) {
+			request.setAttribute("errMsg", "User name already exists.Please try with a different username");
+			return "errorPage.jsp";
+		}
+		
+		
 	}
 
 	private String registernewuser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
