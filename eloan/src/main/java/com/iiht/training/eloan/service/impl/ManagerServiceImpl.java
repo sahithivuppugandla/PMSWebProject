@@ -1,6 +1,7 @@
 package com.iiht.training.eloan.service.impl;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,34 +27,41 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Autowired
 	private UsersRepository usersRepository;
-	
+
 	@Autowired
 	private LoanRepository loanRepository;
-	
+
 	@Autowired
 	private ProcessingInfoRepository pProcessingInfoRepository;
-	
+
 	@Autowired
 	private SanctionInfoRepository sanctionInfoRepository;
-	
+
 	@Override
 	public List<LoanOutputDto> allProcessedLoans() {
-		return loanRepository.findAllProcessedLoan().stream().map(e->EMParser.parseop(e)).collect(Collectors.toList());
+		return loanRepository.findAllProcessedLoan().stream().map(e -> EMParser.parseo(e)).collect(Collectors.toList());
 	}
 
-	
+	@Transactional
 	@Override
-	public LoanOutputDto rejectLoan(Long managerId, Long loanAppId, RejectDto rejectDto) {
-		LoanOutputDto loanOutputDto= new LoanOutputDto();
-		if(rejectDto!=null) {
-			if(!loanRepository.existsById(loanAppId)) {
+	public RejectDto rejectLoan(Long managerId, Long loanAppId, RejectDto rejectDto) {
+		
+
+		LoanOutputDto loanOutputDto = new LoanOutputDto();
+
+		if (rejectDto != null) {
+			if (!loanRepository.existsById(loanAppId)) {
+
 				throw new LoanNotFoundException("Loan" + loanAppId + "  does not exists");
-			}
-			loanOutputDto=EMParser.parseop(loanRepository.rejectLoan(loanAppId));
+			}else {
 			
+			loanRepository.rejectLoan(loanAppId,rejectDto.getRemark());
+
 		}
-		  return loanOutputDto;
+		}
+		return rejectDto;
 	}
+
 	
 	/*
 	 * @Transactional
@@ -71,25 +79,31 @@ public class ManagerServiceImpl implements ManagerService {
 	@Transactional
 	@Override
 	public SanctionOutputDto sanctionLoan(Long managerId, Long loanAppId, SanctionDto sanctionDto) {
-		if(sanctionDto!=null) {
-			if(!loanRepository.existsById(loanAppId)) {
+		if (sanctionDto != null) {
+			if (!loanRepository.existsById(loanAppId)) {
 				throw new LoanNotFoundException("Loan" + loanAppId + "  does not exists");
 			}
 			/*
 			 * if (!loanRepository.existsById(clerkId)) { throw new
 			 * ClerkNotFoundException("Clerk" + clerkId + "  does not exists"); }
 			 */
-			
-			sanctionDto = EMParser.parse(sanctionInfoRepository.save(EMParser.parse(sanctionDto,managerId,loanAppId)));
-			
+
+			sanctionDto = EMParser
+					.parse(sanctionInfoRepository.save(EMParser.parse(sanctionDto, managerId, loanAppId)));
+
 		}
-		Integer interestRate=10;
-		LocalDate loanClosureDate=LocalDate.now().plusMonths(Integer.parseInt(sanctionDto.getPaymentStartDate()));
-		int term = (sanctionDto.getLoanAmountSanctioned())*(1 + interestRate/100)^(sanctionDto.getTermOfLoan());
-		double emi = term/(sanctionDto.getTermOfLoan());
-		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		  String date = sanctionDto.getPaymentStartDate();
+
+		Integer interestRate = 10;
+		LocalDate loanClosureDate = LocalDate.parse(date,formatter).plusMonths(sanctionDto.getTermOfLoan());
+		int term = (sanctionDto.getLoanAmountSanctioned()) * (1 + interestRate / 100) ^ (sanctionDto.getTermOfLoan());
+		double emi = term / (sanctionDto.getTermOfLoan());
+
 		SanctionOutputDto sanctionOutputDto = new SanctionOutputDto();
-		sanctionOutputDto= EMParser.parseop(sanctionInfoRepository.save(EMParser.parse(sanctionDto,managerId,loanAppId,loanClosureDate,emi)));
+		sanctionOutputDto = EMParser.parseop(
+				sanctionInfoRepository.save(EMParser.parse(sanctionDto, managerId, loanAppId, loanClosureDate, emi)));
+		loanRepository.setStatusApp(loanAppId);
 		return sanctionOutputDto;
 	}
 

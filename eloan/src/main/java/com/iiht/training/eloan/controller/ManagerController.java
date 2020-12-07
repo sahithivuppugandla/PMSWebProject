@@ -38,10 +38,10 @@ public class ManagerController {
 	}
 	
 	@PostMapping("/reject-loan/{managerId}/{loanAppId}")
-	public ResponseEntity<LoanOutputDto> rejectLoan(@PathVariable Long managerId,
+	public ResponseEntity<RejectDto> rejectLoan(@PathVariable Long managerId,
 												@PathVariable Long loanAppId,
 												@RequestBody RejectDto rejectDto){
-		return new ResponseEntity<LoanOutputDto>(managerService.rejectLoan(managerId, loanAppId, rejectDto),HttpStatus.OK);
+		return new ResponseEntity<RejectDto>(managerService.rejectLoan(managerId, loanAppId, rejectDto),HttpStatus.OK);
 	}
 	
 	

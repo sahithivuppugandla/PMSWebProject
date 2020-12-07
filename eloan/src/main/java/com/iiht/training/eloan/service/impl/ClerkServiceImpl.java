@@ -3,6 +3,8 @@ package com.iiht.training.eloan.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +28,10 @@ public class ClerkServiceImpl implements ClerkService {
 	
 	@Override
 	public List<LoanOutputDto> allAppliedLoans() {
-		return loanRepository.findAll().stream().map(e->EMParser.parseop(e)).collect(Collectors.toList());
+		return loanRepository.findAll().stream().map(e->EMParser.parseo(e)).collect(Collectors.toList());
 	}
 
+	@Transactional
 	@Override
 	public ProcessingDto processLoan(Long clerkId, Long loanAppId, ProcessingDto processingDto) {
 		
@@ -42,9 +45,9 @@ public class ClerkServiceImpl implements ClerkService {
 			 */
 			
 			processingDto = EMParser.parse(pProcessingInfoRepository.save(EMParser.parse(processingDto,clerkId,loanAppId)));
-			EMParser.parse(loanRepository.setStatus(loanAppId));
+			loanRepository.setStatus(loanAppId);
+		
 		}
 		  return processingDto;
 	}
-
 }

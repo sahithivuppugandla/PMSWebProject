@@ -1,5 +1,7 @@
 package com.iiht.training.eloan.dto;
 
+import java.time.LocalDate;
+
 public class SanctionDto {
 	private Integer loanAmountSanctioned;
 	private Integer termOfLoan;

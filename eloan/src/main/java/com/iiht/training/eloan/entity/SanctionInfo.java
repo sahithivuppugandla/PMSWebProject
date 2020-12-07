@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="sanctionInfo")
 public class SanctionInfo {
 	
 	@Id
@@ -18,7 +20,7 @@ public class SanctionInfo {
 	private Integer loanAmountSanctioned;
 	private Integer termOfLoan;
 	private String paymentStartDate;
-	private LocalDate loanClosureDate;
+	private String loanClosureDate;
 	private Double monthlyPayment;
 	public Long getId() {
 		return id;
@@ -56,10 +58,10 @@ public class SanctionInfo {
 	public void setPaymentStartDate(String paymentStartDate) {
 		this.paymentStartDate = paymentStartDate;
 	}
-	public LocalDate getLoanClosureDate() {
+	public String getLoanClosureDate() {
 		return loanClosureDate;
 	}
-	public void setLoanClosureDate(LocalDate loanClosureDate) {
+	public void setLoanClosureDate(String loanClosureDate) {
 		this.loanClosureDate = loanClosureDate;
 	}
 	public Double getMonthlyPayment() {

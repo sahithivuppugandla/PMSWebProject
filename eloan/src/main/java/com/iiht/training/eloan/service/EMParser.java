@@ -1,6 +1,8 @@
 package com.iiht.training.eloan.service;
 
+import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.iiht.training.eloan.dto.LoanDto;
 import com.iiht.training.eloan.dto.LoanOutputDto;
@@ -13,7 +15,6 @@ import com.iiht.training.eloan.entity.Loan;
 import com.iiht.training.eloan.entity.ProcessingInfo;
 import com.iiht.training.eloan.entity.SanctionInfo;
 import com.iiht.training.eloan.entity.Users;
-import com.iiht.training.eloan.repository.SanctionInfoRepository;
 
 public class EMParser {
 
@@ -30,14 +31,27 @@ public class EMParser {
 		return target;
 	}
 	
-	public static LoanOutputDto parseop(Loan source) {
+	public static LoanOutputDto parseop(Loan source,Users users) {
 		LoanOutputDto target = new LoanOutputDto();
 		
 		target.setLoanAppId(source.getId());
 		target.setCustomerId(source.getCustomerId());
 		target.setRemark(source.getRemark());
 		target.setStatus(source.getStatus());
-			
+		target.setLoanDto(parse(source));
+		target.setUserDto(parse(users));
+		return target;
+	}
+	
+	public static LoanOutputDto parseo(Loan source) {
+		LoanOutputDto target = new LoanOutputDto();
+		
+		target.setLoanAppId(source.getId());
+		target.setCustomerId(source.getCustomerId());
+		target.setRemark(source.getRemark());
+		target.setStatus(source.getStatus());
+		target.setLoanDto(parse(source));
+		
 		return target;
 	}
 	
@@ -45,11 +59,6 @@ public class EMParser {
 	{
 		Loan target = new Loan();
 		
-		/*
-		 * target.setId(source1.getLoanAppId());
-		 * target.setCustomerId(source1.getCustomerId());
-		 * target.setStatus(source1.getStatus()); target.setRemark(source1.getRemark());
-		 */
 		target.setCustomerId(customerId);
 		target.setStatus("submitted");
 		target.setLoanName(source.getLoanName());
@@ -63,7 +72,23 @@ public class EMParser {
 		return target;
 		
 	}
+	public static Loan parseU(LoanDto source,Long customerId,Users users)
+	{
+		Loan target = new Loan();
+		
+		target.setCustomerId(customerId);
+		target.setStatus("submitted");
+		target.setLoanName(source.getLoanName());
+		target.setLoanAmount(source.getLoanAmount());
 	
+		target.setLoanApplicationDate(source.getLoanApplicationDate());
+		target.setBusinessStructure(source.getBusinessStructure());
+		target.setBillingIndicator(source.getBillingIndicator());
+		target.setTaxIndicator(source.getTaxIndicator());
+		
+		return target;
+		
+	}
 
 	public static Users parse(UserDto source) {
 		Users target = new Users();
@@ -99,7 +124,6 @@ public class EMParser {
 		target.setValuationDate(source.getValuationDate());
 		target.setAddressOfProperty(source.getAddressOfProperty());
 		target.setSuggestedAmountOfLoan(source.getSuggestedAmountOfLoan());
-		
 		
 		return target;
 	}
@@ -140,6 +164,12 @@ public class EMParser {
 		SanctionDto target = new SanctionDto();
 		
 		target.setLoanAmountSanctioned(source.getLoanAmountSanctioned());
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		  String date = source.getPaymentStartDate();
+
+		  //convert String to LocalDate
+		// LocalDate localDate = LocalDate.parse(date, formatter);
 		target.setPaymentStartDate(source.getPaymentStartDate());
 		target.setTermOfLoan(source.getTermOfLoan());
 		
@@ -151,7 +181,10 @@ public class EMParser {
 		SanctionInfo target = new SanctionInfo();
 		
 		target.setLoanAmountSanctioned(source.getLoanAmountSanctioned());
-		target.setPaymentStartDate(source.getPaymentStartDate());
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		 
+		target.setPaymentStartDate(source.getPaymentStartDate().toString());
+		//target.setPaymentStartDate(source.getPaymentStartDate());
 		target.setTermOfLoan(source.getTermOfLoan());
 		target.setLoanAppId(loanAppId);
 		target.setManagerId(managerId);
@@ -162,11 +195,11 @@ public class EMParser {
 		SanctionInfo target = new SanctionInfo();
 		
 		target.setLoanAmountSanctioned(source.getLoanAmountSanctioned());
-		target.setPaymentStartDate(source.getPaymentStartDate());
+		target.setPaymentStartDate(source.getPaymentStartDate().toString());
 		target.setTermOfLoan(source.getTermOfLoan());
 		target.setLoanAppId(loanAppId);
 		target.setManagerId(managerId);
-		target.setLoanClosureDate(loanClosureDate);
+		target.setLoanClosureDate(loanClosureDate.toString());
 		target.setMonthlyPayment(monthlyPayment);
 		return target;
 	}
@@ -178,11 +211,16 @@ public class EMParser {
 		target.setLoanAmountSanctioned(source.getLoanAmountSanctioned());
 		target.setLoanClosureDate(source.getLoanClosureDate());
 		target.setMonthlyPayment(source.getMonthlyPayment());
-		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		  String date = source.getPaymentStartDate();
+
+		  //convert String to LocalDate
+		 // LocalDate localDate = LocalDate.parse(date, formatter);
 		target.setPaymentStartDate(source.getPaymentStartDate());
 		target.setTermOfLoan(source.getTermOfLoan());
 		return target;
 	}
+
 
 	
 	

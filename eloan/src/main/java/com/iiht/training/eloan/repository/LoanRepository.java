@@ -18,12 +18,16 @@ public interface LoanRepository extends JpaRepository<Loan, Long>{
 	@Query("SELECT l FROM Loan l WHERE l.status ='processed'")
 	List<Loan> findAllProcessedLoan();
 	
-	@Modifying
-	@Query("UPDATE Loan l set l.status = 'rejected' where l.id=:loanAppId")
-	Loan rejectLoan(Long loanAppId);
+	@Modifying(clearAutomatically=true)
+	@Query("UPDATE Loan l SET l.status = 'rejected', l.remark=:remark where l.id = :loanAppId")
+	public void rejectLoan(Long loanAppId,String remark);
 	
-	@Modifying
-	@Query("UPDATE Loan l set l.status ='processed' where l.id=:loanAppId")
-	Loan setStatus(Long loanAppId);
+	@Modifying(clearAutomatically=true)
+	@Query("UPDATE Loan l SET l.status = 'processed' where l.id = :loanAppId")
+	public void setStatus(Long loanAppId);
+	
+	@Modifying(clearAutomatically=true)
+	@Query("UPDATE Loan l SET l.status = 'approved' where l.id = :loanAppId")
+	public void setStatusApp(Long loanAppId);
 	
 }

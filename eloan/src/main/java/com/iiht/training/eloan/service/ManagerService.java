@@ -11,7 +11,7 @@ public interface ManagerService {
 	
 	public List<LoanOutputDto> allProcessedLoans();
 	
-	public LoanOutputDto rejectLoan(Long managerId,
+	public RejectDto rejectLoan(Long managerId,
 								Long loanAppId,
 								RejectDto rejectDto);
 	

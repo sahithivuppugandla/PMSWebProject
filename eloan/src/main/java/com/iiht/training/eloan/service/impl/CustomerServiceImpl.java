@@ -46,21 +46,13 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional
 	@Override
 	public LoanOutputDto applyLoan(Long customerId, LoanDto loanDto) {
+		LoanOutputDto loanOutputDto = new LoanOutputDto();
+		UserDto userDto= new UserDto();
 		if (loanDto != null) {
 			
-			/*
-			 * if (!loanRepository.existsById(customerId)) { throw new
-			 * CustomerNotFoundException("Customer" + customerId + "  does not exists"); }
-			 */
-			LoanOutputDto = EMParser.parse(loanRepository.save(EMParser.parse(loanDto,customerId)));
+			loanOutputDto = EMParser.parseop(loanRepository.save(EMParser.parse(loanDto,customerId)),usersRepository.findById(customerId).get());			
 		}
 		
-		LoanOutputDto loanOutputDto = new LoanOutputDto();
-		
-		loanOutputDto.setCustomerId(customerId);
-		loanOutputDto.setLoanDto(loanDto);
-		loanOutputDto.setLoanAppId(loanDto);
-		loanOutputDto.setStatus("submitted");
 		return loanOutputDto;
 		
 		
@@ -71,7 +63,7 @@ public class CustomerServiceImpl implements CustomerService {
 		if(!loanRepository.existsById(loanAppId)) {
 			throw new LoanNotFoundException("Loan" + loanAppId + "  does not exists");
 		}
-		LoanOutputDto loanOutputDto = EMParser.parseop(loanRepository.findById(loanAppId).get());
+		LoanOutputDto loanOutputDto = EMParser.parseo(loanRepository.findById(loanAppId).get());
 		
 		
 		return loanOutputDto;
@@ -80,12 +72,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<LoanOutputDto> getStatusAll(Long customerId) {
-		/*
-		 * if(!loanRepository.existsById(customerId)) { throw new
-		 * CustomerNotFoundException("Customer " + customerId + "  does not exists"); }
-		 */
+		
 		return loanRepository.findAllByCustId(customerId)
-				.stream().map(e->EMParser.parseop(e)).collect(Collectors.toList());
+				.stream().map(e->EMParser.parseo(e)).collect(Collectors.toList());
 	
 	}
 

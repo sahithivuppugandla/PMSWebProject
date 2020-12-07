@@ -6,7 +6,7 @@ public class SanctionOutputDto {
 	private Integer loanAmountSanctioned;
 	private Integer termOfLoan;
 	private String paymentStartDate;
-	private LocalDate loanClosureDate;
+	private String loanClosureDate;
 	private Double monthlyPayment;
 	public Integer getLoanAmountSanctioned() {
 		return loanAmountSanctioned;
@@ -26,10 +26,10 @@ public class SanctionOutputDto {
 	public void setPaymentStartDate(String paymentStartDate) {
 		this.paymentStartDate = paymentStartDate;
 	}
-	public LocalDate getLoanClosureDate() {
+	public String getLoanClosureDate() {
 		return loanClosureDate;
 	}
-	public void setLoanClosureDate(LocalDate localDate) {
+	public void setLoanClosureDate(String localDate) {
 		this.loanClosureDate = localDate;
 	}
 	public Double getMonthlyPayment() {
