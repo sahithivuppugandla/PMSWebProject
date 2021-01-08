@@ -173,8 +173,8 @@ body {
 		
 		if(usernameValue === '') {
 			setErrorFor(username, 'Username cannot be blank');
-		} else if(usernameValue.length<8 || usernameValue.length>16){
-			setErrorFor(username, 'Username should contain 8 to 16 characters');
+		} else if(usernameValue.length<4 || usernameValue.length>15){
+			setErrorFor(username, 'Username should contain 4 to 15 characters');
 			}
 		else {
 			setSuccessFor(username);
@@ -182,8 +182,8 @@ body {
 		
 		if(passwordValue === '') {
 			setErrorFor(password, 'Password cannot be blank');
-		} else if (passwordValue.length<8 || passwordValue>16){
-			setErrorFor(password, 'Password should contain 8 to 16 characters');
+		} else if (passwordValue.length<8 || passwordValue>15){
+			setErrorFor(password, 'Password should contain 8 to 15 characters');
 		}
 		else {
 			setSuccessFor(password);

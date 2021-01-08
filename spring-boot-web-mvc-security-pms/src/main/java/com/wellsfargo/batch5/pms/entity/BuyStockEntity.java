@@ -5,6 +5,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -12,11 +14,10 @@ import javax.persistence.Table;
 @Table(name="buyStocks")
 public class BuyStockEntity extends InvestorEntity  {
 
-	@OneToMany(mappedBy="buyStock", cascade=CascadeType.ALL)
-	private Set<StockEntity> stocks;
 	
-	@OneToMany(mappedBy="buyStock", cascade=CascadeType.ALL)
-	private Set<CompanyEntity> company;
+	@ManyToOne
+	@JoinColumn(name="comp_code")
+	private CompanyEntity company;
 	
 	@Column(name="sharecount")
 	private Integer shareCount;
@@ -26,26 +27,19 @@ public class BuyStockEntity extends InvestorEntity  {
 		
 	}
 
-	public BuyStockEntity(Set<StockEntity> stocks, Set<CompanyEntity> company, Integer shareCount) {
+	public BuyStockEntity(Integer shareCount, CompanyEntity company) {
 		super();
-		this.stocks = stocks;
-		this.company = company;
 		this.shareCount = shareCount;
+		this.company=company;
 	}
 
-	public Set<StockEntity> getStocks() {
-		return stocks;
-	}
+	
 
-	public void setStocks(Set<StockEntity> stocks) {
-		this.stocks = stocks;
-	}
-
-	public Set<CompanyEntity> getCompany() {
+	public CompanyEntity getCompany() {
 		return company;
 	}
 
-	public void setCompany(Set<CompanyEntity> company) {
+	public void setCompany(CompanyEntity company) {
 		this.company = company;
 	}
 
@@ -59,7 +53,7 @@ public class BuyStockEntity extends InvestorEntity  {
 
 	@Override
 	public String toString() {
-		return "BuyStockEntity [stocks=" + stocks + ", company=" + company + ", shareCount=" + shareCount + "]";
+		return "BuyStockEntity [company=" + company + ", shareCount=" + shareCount + "]";
 	}
 	
 	

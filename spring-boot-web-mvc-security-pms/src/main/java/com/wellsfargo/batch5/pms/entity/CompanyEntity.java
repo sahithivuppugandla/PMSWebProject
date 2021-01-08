@@ -47,9 +47,8 @@ public class CompanyEntity implements Comparable<CompanyEntity> {
 	@OneToMany(mappedBy="company", cascade=CascadeType.ALL)
 	private Set<StockEntity> stocks;
 	
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private BuyStockEntity buyStock;
+	@OneToMany(mappedBy="company", cascade=CascadeType.ALL)
+	private Set<BuyStockEntity> buyStock;
  
     public CompanyEntity(){
    	 
@@ -143,11 +142,13 @@ public class CompanyEntity implements Comparable<CompanyEntity> {
 
 	
 
-	public BuyStockEntity getBuyStock() {
+	
+
+	public Set<BuyStockEntity> getBuyStock() {
 		return buyStock;
 	}
 
-	public void setBuyStock(BuyStockEntity buyStock) {
+	public void setBuyStock(Set<BuyStockEntity> buyStock) {
 		this.buyStock = buyStock;
 	}
 
@@ -168,14 +169,17 @@ public class CompanyEntity implements Comparable<CompanyEntity> {
 		return Objects.equals(this, obj);
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Company [companyCode=" + companyCode + ", companyTitle=" + companyTitle + ", companyOperations="
+		return "CompanyEntity [companyCode=" + companyCode + ", companyTitle=" + companyTitle + ", companyOperations="
 				+ companyOperations + ", shareCount=" + shareCount + ", openSharePrice=" + openSharePrice + ", sector="
-				+ sector + ", currency=" + currency + ", turnover=" + turnover + ", stocks=" + stocks + "]";
+				+ sector + ", currency=" + currency + ", turnover=" + turnover + ", stocks=" + stocks + ", buyStock="
+				+ buyStock + "]";
 	}
+
+
+
+	
 
 
 

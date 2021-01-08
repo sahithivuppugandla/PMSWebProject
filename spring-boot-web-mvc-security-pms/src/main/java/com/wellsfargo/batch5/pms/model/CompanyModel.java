@@ -46,7 +46,7 @@ public class CompanyModel implements Comparable<CompanyModel> {
 	
 	private Set<StockModel> stocks;
 	
-	private BuyStockEntity buyStock;
+	private Set<BuyStockModel> buyStock;
  
     public CompanyModel(){
    	 
@@ -66,13 +66,15 @@ public class CompanyModel implements Comparable<CompanyModel> {
 		
 	}
 
+	
+	public void setCompanyCode(Integer companyCode) {
+		this.companyCode = companyCode;
+	}
+	
 	public Integer getCompanyCode() {
 		return companyCode;
 	}
 
-	public void setCompanyCode(Integer companyCode) {
-		this.companyCode = companyCode;
-	}
 
 	public String getCompanyTitle() {
 		return companyTitle;
@@ -139,11 +141,13 @@ public class CompanyModel implements Comparable<CompanyModel> {
 	}
 
 
-	public BuyStockEntity getBuyStock() {
+	
+
+	public Set<BuyStockModel> getBuyStock() {
 		return buyStock;
 	}
 
-	public void setBuyStock(BuyStockEntity buyStock) {
+	public void setBuyStock(Set<BuyStockModel> buyStock) {
 		this.buyStock = buyStock;
 	}
 
@@ -165,14 +169,17 @@ public class CompanyModel implements Comparable<CompanyModel> {
 		return Objects.equals(this, obj);
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Company [companyCode=" + companyCode + ", companyTitle=" + companyTitle + ", companyOperations="
+		return "CompanyModel [companyCode=" + companyCode + ", companyTitle=" + companyTitle + ", companyOperations="
 				+ companyOperations + ", shareCount=" + shareCount + ", openSharePrice=" + openSharePrice + ", sector="
-				+ sector + ", currency=" + currency + ", turnover=" + turnover + ", stocks=" + stocks + "]";
+				+ sector + ", currency=" + currency + ", turnover=" + turnover + ", stocks=" + stocks + ", buyStock="
+				+ buyStock + "]";
 	}
+
+
+
+	
 
 
 

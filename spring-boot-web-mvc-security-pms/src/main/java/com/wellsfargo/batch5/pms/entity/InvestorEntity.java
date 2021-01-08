@@ -1,7 +1,10 @@
 package com.wellsfargo.batch5.pms.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +17,7 @@ public class InvestorEntity extends LoginEntity {
 	@Column(name="lnm")
 	private String lastName;
 	
+	
 	@Column(name="mobile")
 	private String mobileNumber;
 	
@@ -23,6 +27,11 @@ public class InvestorEntity extends LoginEntity {
 	@Column(name="address")
 	private String address;
 
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="wallet_id")
+	private PortfolioWalletEntity wallet;
+	
 	public InvestorEntity() {
 		
 	}
@@ -75,5 +84,13 @@ public class InvestorEntity extends LoginEntity {
 		this.address = address;
 	}
 	
+	public PortfolioWalletEntity getWallet() {
+		return wallet;
+	}
+
+	public void setWallet(PortfolioWalletEntity wallet) {
+		this.wallet = wallet;
+	}
+
 	
 }

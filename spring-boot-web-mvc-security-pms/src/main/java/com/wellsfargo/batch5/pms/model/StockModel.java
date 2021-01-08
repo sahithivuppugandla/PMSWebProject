@@ -41,8 +41,6 @@ public class StockModel implements Comparable<StockModel> {
 	
 	private CompanyModel company;
 	
-	private BuyStockModel buyStock;
-	
 	public StockModel(){
 		
 	}
@@ -101,14 +99,6 @@ public class StockModel implements Comparable<StockModel> {
 		this.company = company;
 	}
 
-	
-	public BuyStockModel getBuyStock() {
-		return buyStock;
-	}
-
-	public void setBuyStock(BuyStockModel buyStock) {
-		this.buyStock = buyStock;
-	}
 
 	@Override
 	public int compareTo(StockModel o) {

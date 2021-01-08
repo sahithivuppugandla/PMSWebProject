@@ -14,12 +14,6 @@
     <li class="nav-item ">
       <a class="nav-link" href="/stocks">Stocks</a>
    </li> 
-   <li class="nav-item ">
-      <a class="nav-link" href="/commodity">Commodities</a>
-   </li>
-   <li class="nav-item ">
-      <a class="nav-link" href="/commodity/new">Add Commodity</a>
-   </li> 
     <li class="nav-item ">
       <a class="nav-link" href="/stocks/new">Add Stock Price</a>
    </li> 

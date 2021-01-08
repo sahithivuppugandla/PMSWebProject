@@ -43,9 +43,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()		
-		.antMatchers("/company","/stocks","/commodity").hasAnyAuthority("INVESTOR","BOR")
+		.antMatchers("/company","/stocks").hasAnyAuthority("INVESTOR","BOR")
 		.antMatchers("/register/bor").hasAuthority("SUPERUSER")
-		.antMatchers("/company/**","/stocks/**","/commodity/**").hasAuthority("BOR");
+		.antMatchers("/company/**","/stocks/**").hasAuthority("BOR");
 		
 
 		http.formLogin().loginPage("/login").failureUrl("/login?error=true").defaultSuccessUrl("/")

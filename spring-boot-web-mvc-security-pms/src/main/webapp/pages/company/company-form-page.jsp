@@ -19,7 +19,7 @@
 		<script src="https://kit.fontawesome.com/996973c893.js"></script>
 </head>
 <body>
-	<jsp:include page="/pages/back-office-user.jsp"/>
+	<jsp:include page="/header"/>
 	<div class="offset-md-4 container-fluid">
 	<h3>${isNew?"New":"Edit" } Company</h3>
 		<div class="row">

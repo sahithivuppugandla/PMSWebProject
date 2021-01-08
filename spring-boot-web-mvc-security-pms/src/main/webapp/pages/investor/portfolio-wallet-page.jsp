@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Create a Commodity Profile</title>
+<title>Buy Stock</title>
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -21,33 +21,25 @@
 <body>
 	<jsp:include page="/header"/>
 	<div class="offset-md-4 container-fluid">
-	<h3>${isNew?"New":"Edit" } Commodity</h3>
+	<h3>Buy Stock</h3>
 		<div class="row">
 			<div class="col-md-4">
-				<form:form action="/commodity/${isNew?'add':'update' }" 
-				method="POST" modelAttribute="commodity" class="form">
+				<form:form action="/investor/wallet" 
+				method="POST" modelAttribute="wallet" class="form">
 				<div class="form-control-group">
 					<form:errors path="*"/>				
 				</div>
-				<div class="form-control-group">
-					<form:label path="itemName" class="form-control-label">Commodity Name</form:label>
-					<form:input path="itemName" class="form-control" type="text"/>
-				</div>
-			
-				<div class="form-control-group">
-					<form:label path="itemPrice" class="form-control-label">Current Price</form:label>
-					<form:input path="itemPrice" class="form-control" type="number"/>
-				</div>
-				<div class="form-control-group">
-					<form:label path="updatedDate" class="form-control-label">Updated date</form:label>
-					<form:input path="updatedDate" class="form-control" type="date"/>
+				
+				 <div class="form-control-group">
+					<form:label path="company.openSharePrice" class="form-control-label">Open share price </form:label>
+											
+						<form:input path="company.openSharePrice" items="${wallet }" itemLabel="${wallet}" itemValue="${wallet}" class="form-control"/>
+					
 				</div> 
 				<div class="form-control-group">
-					<form:label path="updatedTime" class="form-control-label">Updated time</form:label>
-					<form:input path="updatedTime" class="form-control" type="time"/>
-				</div>
-				
-				 
+					<form:label path="shareCount" class="form-control-label">Number of Share</form:label>
+					<form:input path="shareCount" class="form-control" type="decimal"/>
+				</div>				 
 				<div class="form-control-group">
 					<button class="btn btn-primary">SAVE</button>
 				</div>
